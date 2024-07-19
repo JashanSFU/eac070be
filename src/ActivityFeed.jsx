@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const API_BASE_URL = 'https://aircall-backend.onrender.com';
 
 const groupCallsByDate = (calls) => {
   const grouped = {};
   calls.forEach(call => {
-    const date = new Date(call.date).toLocaleDateString();
+    const date = new Date(call.created_at).toLocaleDateString();
     if (!grouped[date]) {
       grouped[date] = [];
     }
@@ -12,27 +15,47 @@ const groupCallsByDate = (calls) => {
   return grouped;
 };
 
-const ActivityFeed = ({ calls, onArchive, onUnarchive, archiveAll, unarchiveAll, showArchived, onSelectCall, selectedCall }) => {
-  // Group calls by date
-  const groupedCalls = groupCallsByDate(calls);
+const ActivityFeed = ({
+  calls,
+  onArchive,
+  onUnarchive,
+  archiveAll,
+  unarchiveAll,
+  showArchived,
+  onSelectCall,
+  selectedCall }) => {
+  const [groupedCalls, setGroupedCalls] = useState(groupCallsByDate(calls));
+  
+  useEffect(() => {
+    console.log("changed calls");
+    setGroupedCalls(groupCallsByDate(calls));
+  }, [calls]);
 
   return (
     <div className="activity-feed">
       {showArchived ? (
         <>
-        <button class="button-archive" onClick={unarchiveAll}>
-          <i class="bi bi-archive"></i>
-          Unarchive All Calls
-        </button>
-          {/* <button onClick={unarchiveAll}>Unarchive All</button> */}
+          <button className="button-archive" onClick={unarchiveAll}>
+            <i className="bi bi-archive"></i>
+            Unarchive All Calls
+          </button>
           {Object.keys(groupedCalls).map(date => (
             <div key={date}>
-              <h3 className='activity-date'>{(groupedCalls[date].filter(call => call.archived).length != 0) ? date : ""}</h3>
-              {groupedCalls[date].filter(call => call.archived).map(call => (
-                <div key={call.id} className={(selectedCall === call) ? "selected call-item" : "call-item"} onClick={() => onSelectCall(call)}>
+              {groupedCalls[date].some(call => call.is_archived) && (
+                <h3 className='activity-date'>{date}</h3>
+              )}
+              {groupedCalls[date].filter(call => call.is_archived).map(call => (
+                <div
+                  key={call.id}
+                  className={(selectedCall === call) ? "selected call-item" : "call-item"}
+                  onClick={() => onSelectCall(call)}
+                >
+                  {/* {call.direction == "outgoing" && <i class="bi bi-arrow-up-left"></i>}
+                  {call.direction == "incoming" && <i class="bi bi-arrow-up-right"></i>} */}
+                  
                   <div className='call-item-description'>
-                    <p>{call.number}</p>
-                    <p>Tried to call on {call.user}</p>
+                    <p>{call.from} → {call.to}</p>
+                    <p>Called by {call.user}</p>
                   </div>
                   <button onClick={(e) => { e.stopPropagation(); onUnarchive(call.id); }}>Unarchive</button>
                 </div>
@@ -42,19 +65,26 @@ const ActivityFeed = ({ calls, onArchive, onUnarchive, archiveAll, unarchiveAll,
         </>
       ) : (
         <>
-          <button class="button-archive" onClick={archiveAll}>
-            <i class="bi bi-archive-fill"></i>
+          <button className="button-archive" onClick={archiveAll}>
+            <i className="bi bi-archive-fill"></i>
             Archive All Calls
           </button>
-          {/* <button onClick={archiveAll}>Archive All</button> */}
           {Object.keys(groupedCalls).map(date => (
             <div key={date}>
-              <h3 className='activity-date'>{(groupedCalls[date].filter(call => !call.archived) != 0) ? date : ""}</h3>
-              {groupedCalls[date].filter(call => !call.archived).map(call => (
-                <div key={call.id} className={(selectedCall === call) ? "selected call-item" : "call-item"} onClick={() => onSelectCall(call)}>
+              {groupedCalls[date].some(call => !call.is_archived) && (
+                <h3 className='activity-date'>{date}</h3>
+              )}
+              {groupedCalls[date].filter(call => !call.is_archived).map(call => (
+                <div
+                  key={call.id}
+                  className={(selectedCall === call) ? "selected call-item" : "call-item"}
+                  onClick={() => onSelectCall(call)}
+                >
+                  {/* {call.direction == "outgoing" && <i class="bi bi-arrow-up-left"></i>}
+                  {call.direction == "incoming" && <i class="bi bi-arrow-up-right"></i>} */}
                   <div className='call-item-description'>
-                    <p>{call.number}</p>
-                    <p>Tried to call on {call.user}</p>
+                    <p>{call.from} → {call.to}</p>
+                    <p>Called by {call.user}</p>
                   </div>
                   <button onClick={(e) => { e.stopPropagation(); onArchive(call.id); }}>Archive</button>
                 </div>
