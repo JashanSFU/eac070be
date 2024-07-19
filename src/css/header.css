@@ -1,0 +1,15 @@
+header {
+  height: 60px; /* Adjust height as needed, ensure it’s enough to contain the SVG */
+  margin: 0 auto; /* Center the header horizontally */
+  padding: 10px 0; /* Adjust padding if necessary */
+  text-align: center; /* Center text and inline elements */
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+  background-color: #fff; /* Ensure the header has a background color */
+}
+
+header svg {
+  display: block; /* Ensure SVG is treated as a block element */
+  max-width: 100%; /* Ensure SVG does not exceed header width */
+  max-height: 100%; /* Ensure SVG does not exceed header height */
+  margin: 0 auto; /* Center SVG within the header */
+}

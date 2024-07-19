@@ -1,0 +1,171 @@
+/* styles.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-view {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1; /* Allow container to grow */
+  overflow:auto; /* Handle overflow within the container */
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.tabs button:hover {
+  background-color: #0056b3;
+}
+
+.activity-feed {
+  width: 100%;
+  display: block;
+}
+.activity-feed button{
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+.call-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.selected{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #7c7676;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+.selected button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px; /* Optional: space between button and text */
+}
+.call-item:hover {
+  background-color: #f1f1f1;
+}
+
+.call-item p {
+  margin: 5px 0;
+  flex-grow: 1; /* Allow paragraphs to take remaining space */
+}
+.call-item-description{
+  width: 200%;
+}
+
+.call-item button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px; /* Optional: space between button and text */
+}
+
+.call-item button:hover {
+  background-color: #c82333;
+}
+
+.activity-detail {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 90%;
+  margin-top: 20px;
+}
+
+.activity-detail h2 {
+  margin-top: 0;
+}
+.activity-date{
+  text-align: center;
+}
+.call-detail-header{
+  font-size: medium;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.activity-detail {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.call-detail-header {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.button-archive {
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-archive:hover {
+  background-color: #0056b3;
+}
+
+.button-archive i {
+  margin-right: 10px; /* Adjust the margin as needed */
+  font-size: 20px;
+}
