@@ -6,7 +6,7 @@ import Popup from './Popup.jsx';
 import NavbarComponent from './NavBar.jsx';
 import axios from 'axios';
 import './css/styles.css';
-import ActivityDetail from './ActivityDetail.jsx';
+
 
 const API_BASE_URL = 'https://aircall-backend.onrender.com';
 
@@ -94,9 +94,9 @@ const App = () => {
           onSelectCall={handleCallSelect}
           selectedCall={selectedCall}
         />
-        {selectedCall && <ActivityDetail call={selectedCall} />}
       </div>
     </div>
+    
   );
 };
 

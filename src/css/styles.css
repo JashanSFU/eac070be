@@ -1,5 +1,4 @@
-/* styles.css */
-
+/* General Container Styles */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -17,9 +16,11 @@
   flex-direction: column;
   align-items: center;
   flex-grow: 1; /* Allow container to grow */
-  overflow:auto; /* Handle overflow within the container */
+  overflow: auto; /* Handle overflow within the container */
 }
 
+
+/* Tabs Styles */
 .tabs {
   display: flex;
   justify-content: space-between;
@@ -40,11 +41,12 @@
   background-color: #0056b3;
 }
 
+/* Activity Feed Styles */
 .activity-feed {
   width: 100%;
-  display: block;
 }
-.activity-feed button{
+
+.activity-feed button {
   padding: 10px;
   margin-bottom: 10px;
   border: none;
@@ -53,6 +55,8 @@
   color: white;
   cursor: pointer;
 }
+
+/* Call Item Styles */
 .call-item {
   display: flex;
   flex-direction: row;
@@ -64,30 +68,9 @@
   background-color: #fff;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  position: relative; /* Ensure .activity-box is positioned relative to this */
 }
 
-.selected{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    background-color: #7c7676;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-.selected button {
-  align-self: flex-start;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #dc3545;
-  color: white;
-  cursor: pointer;
-  margin-right: 10px; /* Optional: space between button and text */
-}
 .call-item:hover {
   background-color: #f1f1f1;
 }
@@ -96,8 +79,10 @@
   margin: 5px 0;
   flex-grow: 1; /* Allow paragraphs to take remaining space */
 }
-.call-item-description{
+
+.call-item-description {
   width: 200%;
+  display: block;
 }
 
 .call-item button {
@@ -115,40 +100,59 @@
   background-color: #c82333;
 }
 
-.activity-detail {
+/* Selected Styles */
+.selected {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 8px;
-  background-color: #fff;
-  width: 90%;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: #7c7676;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
+
+.selected button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px; /* Optional: space between button and text */
+}
+
+/* .activity-detail {
+  border: 1px solid #ddd;
+  padding: 20px; 
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+} */
 
 .activity-detail h2 {
   margin-top: 0;
 }
-.activity-date{
-  text-align: center;
-}
-.call-detail-header{
-  font-size: medium;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
 
-.activity-detail {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.activity-date {
+  text-align: center;
+  padding: 10px;
 }
 
 .call-detail-header {
   font-size: 1.5em;
   margin-bottom: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* Button Archive Styles */
 .button-archive {
-  align-items: center;
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
@@ -159,6 +163,7 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
+  display: inline;
 }
 
 .button-archive:hover {
@@ -168,4 +173,35 @@
 .button-archive i {
   margin-right: 10px; /* Adjust the margin as needed */
   font-size: 20px;
+}
+
+/* Navigation Button Styles */
+.nav-button {
+  background: transparent;
+  border: none;
+  color: #000;
+  font-size: 16px;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-button.active {
+  font-weight: bold;
+  color: #007bff; /* Bootstrap primary color or any highlight color */
+  border-bottom: 2px solid #007bff; /* Optional: Add a bottom border to indicate active state */
+}
+
+.nav-button:hover {
+  color: #0056b3; /* Optional: Add a hover effect */
+}
+
+.activity-detail {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 20px; /* Ensure space above the detail box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

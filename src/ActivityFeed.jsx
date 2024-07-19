@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ActivityDetail from './ActivityDetail.jsx';
 
 const API_BASE_URL = 'https://aircall-backend.onrender.com';
 
@@ -42,22 +43,22 @@ const ActivityFeed = ({
           {Object.keys(groupedCalls).map(date => (
             <div key={date}>
               {groupedCalls[date].some(call => call.is_archived) && (
-                <h3 className='activity-date'>{date}</h3>
+                <strong><h3 className='activity-date'>{date}</h3></strong>
               )}
               {groupedCalls[date].filter(call => call.is_archived).map(call => (
-                <div
-                  key={call.id}
-                  className={(selectedCall === call) ? "selected call-item" : "call-item"}
-                  onClick={() => onSelectCall(call)}
-                >
-                  {/* {call.direction == "outgoing" && <i class="bi bi-arrow-up-left"></i>}
-                  {call.direction == "incoming" && <i class="bi bi-arrow-up-right"></i>} */}
-                  
-                  <div className='call-item-description'>
-                    <p>{call.from} → {call.to}</p>
-                    <p>Called by {call.user}</p>
+                <div>
+                  <div
+                    key={call.id}
+                    className={(selectedCall === call) ? "selected call-item" : "call-item"}
+                    onClick={() => onSelectCall(call)}
+                  > 
+                    <div className='call-item-description'>
+                      <p><strong>{call.from}</strong></p>
+                      <p>tried to Call on {(call.direction === 'incoming') ? call.to : call.from}</p>
+                    </div>
+                    <button onClick={(e) => { e.stopPropagation(); onUnarchive(call.id); }}>Unarchive</button>
                   </div>
-                  <button onClick={(e) => { e.stopPropagation(); onUnarchive(call.id); }}>Unarchive</button>
+                  {selectedCall && call.id === selectedCall.id &&  <ActivityDetail className='activity-box' call={selectedCall} />}
                 </div>
               ))}
             </div>
@@ -66,27 +67,28 @@ const ActivityFeed = ({
       ) : (
         <>
           <button className="button-archive" onClick={archiveAll}>
-            <i className="bi bi-archive-fill"></i>
+            <i className="bi bi-archive"></i>
             Archive All Calls
           </button>
           {Object.keys(groupedCalls).map(date => (
             <div key={date}>
               {groupedCalls[date].some(call => !call.is_archived) && (
-                <h3 className='activity-date'>{date}</h3>
+                <strong><h3 className='activity-date'>{date}</h3></strong>
               )}
               {groupedCalls[date].filter(call => !call.is_archived).map(call => (
-                <div
-                  key={call.id}
-                  className={(selectedCall === call) ? "selected call-item" : "call-item"}
-                  onClick={() => onSelectCall(call)}
-                >
-                  {/* {call.direction == "outgoing" && <i class="bi bi-arrow-up-left"></i>}
-                  {call.direction == "incoming" && <i class="bi bi-arrow-up-right"></i>} */}
-                  <div className='call-item-description'>
-                    <p>{call.from} → {call.to}</p>
-                    <p>Called by {call.user}</p>
-                  </div>
-                  <button onClick={(e) => { e.stopPropagation(); onArchive(call.id); }}>Archive</button>
+                <div>
+                  <div
+                    key={call.id}
+                    className={(selectedCall === call) ? "selected call-item" : "call-item"}
+                    onClick={() => onSelectCall(call)}
+                  > 
+                    <div className='call-item-description'>
+                      <p><strong>{call.from}</strong></p>
+                      <p>tried to Call on {(call.direction === 'incoming') ? call.to : call.from}</p>
+                    </div>
+                    <button onClick={(e) => { e.stopPropagation(); onArchive(call.id); }}>archive</button>
+                    </div>
+                  {selectedCall && call.id === selectedCall.id &&  <ActivityDetail className='activity-box' call={selectedCall} />}
                 </div>
               ))}
             </div>
